@@ -7,7 +7,7 @@
         AWS_SAM_STACK_NAME = "my-lambda-stack"
         AWS_DEFAULT_REGION = "ap-south-1"
         AWS_ACCESS_KEY_ID = credentials('aws-access-key')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-security-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
 
    }
 
