@@ -1,28 +1,61 @@
-pipeline {
-  agent any {
-     stages('setup') {
-        steps {
-          sh "pip3 install -r lambda-app/tests/requirements.txt"
-        }
-       }
-     stage('Test') {
-        steps {
-          sh "pytest"
-       }
-     }
-    stage('Build'){
-      steps {
-        sh "sam build -t lambda-app/template.yaml"
-      }
-     }
-    stage('Deploy'){
-     environment {
+ pipeline {
+
+  agent any
+
+   environment {
+     
+        AWS_SAM_STACK_NAME = "my-lambda-stack"
+        AWS_DEFAULT_REGION = "ap-south-1"
         AWS_ACCESS_KEY_ID = credentials('aws-access-key')
-        AWS_SECRET_KEY_ID = credentials('aws-security-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-security-key')
+
+   }
+
+     stages{
+
+       stage('Setup'){
+
+        steps {
+
+          sh '''
+          pip3 install --break-system-package -y aws-cli-sam
+          pip3 install --break-system-package -r tests/requirements.txt
+          '''
+
+        }
+
        }
-     steps {
-       sh "sam deploy -t lambda-app/template.taml"
+
+     stage('Test') {
+
+        steps {
+
+          sh "pytest"
+
+       }
+
+     }
+
+    stage('Build'){
+
+      steps {
+
+        sh "sam build -t template.yaml"
+
       }
+
+     }
+
+    stage('Deploy'){
+
+     steps {
+
+       sh "sam deploy -t template.yaml"
+
+      }
+
     }
+
   }
+
 }
