@@ -35,6 +35,16 @@
 
      }
 
+    stage('Deploy'){
+
+     steps {
+
+       sh "sam deploy -t template.yaml --no-confirm-changeset --no-fail-on-empty-changeset"
+
+      }
+
+    }
+      
      stage('Test') {
 
         steps {
@@ -45,15 +55,6 @@
 
      }
 
-    stage('Deploy'){
-
-     steps {
-
-       sh "sam deploy -t template.yaml --no-confirm-changeset --no-fail-on-empty-changeset"
-
-      }
-
-    }
 
   }
 
