@@ -44,6 +44,10 @@
       }
 
     }
+      stage ('Delete resources') {
+       steps{
+
+        sh "sam delete "
 
   }
 
