@@ -18,7 +18,6 @@
         steps {
 
           sh '''
-          pip3 install --break-system-package aws-sam-cli
           pip3 install --break-system-package -r tests/requirements.txt
           '''
 
