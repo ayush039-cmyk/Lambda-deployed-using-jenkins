@@ -18,23 +18,13 @@
         steps {
 
           sh '''
-          pip3 install --break-system-package -y aws-cli-sam
+          pip3 install --break-system-package aws-sam-cli
           pip3 install --break-system-package -r tests/requirements.txt
           '''
 
         }
 
        }
-
-     stage('Test') {
-
-        steps {
-
-          sh "pytest"
-
-       }
-
-     }
 
     stage('Build'){
 
@@ -46,11 +36,21 @@
 
      }
 
+     stage('Test') {
+
+        steps {
+
+          sh "pytest"
+
+       }
+
+     }
+
     stage('Deploy'){
 
      steps {
 
-       sh "sam deploy -t template.yaml"
+       sh "sam deploy -t template.yaml --no-confirm-changeset --no-fail-on-empty-changeset"
 
       }
 
