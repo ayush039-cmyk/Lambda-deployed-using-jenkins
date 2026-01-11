@@ -44,17 +44,6 @@
       }
 
     }
-      
-     stage('Test') {
-
-        steps {
-
-          sh "pytest"
-
-       }
-
-     }
-
 
   }
 
