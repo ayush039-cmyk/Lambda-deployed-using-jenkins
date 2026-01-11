@@ -47,7 +47,7 @@
       stage ('Delete resources') {
        steps{
 
-        sh "sam delete "
+        sh "sam delete --no-prompts"
        }
       }
 
