@@ -48,7 +48,9 @@
        steps{
 
         sh "sam delete "
+       }
+      }
 
-  }
 
 }
+ }
